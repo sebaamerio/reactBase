@@ -5,69 +5,70 @@ import { getTodos } from "./services/list.service";
 import "./App.css";
 
 function App() {
-	const [list, setList] = useState([]);
+  const [list, setList] = useState([]);
 
-	useEffect(() => {
-		console.log("useEffect");
-		getTodos().then((data) => {
-			console.log("data", data);
-			setList(data);
-		});
-	}, []);
+  useEffect(() => {
+    getTodos().then((data) => {
+      setList(data);
+    });
+  }, []);
 
-	const getId = () => {
-		let itemMayor = 0;
-		list.forEach((item) => {
-			if (item.id > itemMayor) itemMayor = parseInt(item.id);
-		});
+  const getId = () => {
+    let itemMayor = 0;
+    list.forEach((item) => {
+      if (item.id > itemMayor) itemMayor = parseInt(item.id);
+    });
 
-		return itemMayor + 1;
-	};
+    return itemMayor + 1;
+  };
 
-	const handleAddItem = (pTitle) => {
-		const newItem = {
-			id: getId(),
-			title: pTitle,
-			completed: false,
-		};
-		setList([...list, newItem]);
-	};
+  const handleAddItem = (pTitle) => {
+    const newItem = {
+      id: getId(),
+      title: pTitle,
+      completed: false,
+    };
+    setList([...list, newItem]);
+  };
 
-	const handleRemoveItem = (id) => {
-		const newList = list.filter((item) => item.id != id);
+  const handleRemoveItem = (id) => {
+    const newList = list.filter((item) => item.id != id);
 
-		if (newList.length >= 0) {
-			setList(newList);
-		}
-	};
+    if (newList.length >= 0) {
+      setList(newList);
+    }
+  };
 
-	const handleCheck = ({ id }) => {
-		const newList = list.map((item) => {
-			if (item.id == id) {
-				item.completed = !item.completed;
-			}
-			return item;
-		});
+  const handleCheck = ({ id }) => {
+    const newList = list.map((item) => {
+      if (item.id == id) {
+        return {
+          ...item,
+          completed: !item.completed,
+        };
+      }
+      return item;
+    });
 
-		setList(newList);
-	};
+    setList(newList);
+  };
 
-	return (
-		<div className="grid-container">
-			<header className="header">
-				<Form handleAddItem={handleAddItem} />
-			</header>
+  return (
+    <div className="grid-container">
+      <header className="header">
+        <Form handleAddItem={handleAddItem} />
+      </header>
 
-			<article className="main">
-				<Table
-					elements={list}
-					handleCheck={handleCheck}
-					handleRemoveItem={handleRemoveItem}
-				></Table>
-			</article>
-			<footer className="footer"> footer</footer>
-		</div>
-	);
+      <article className="main">
+        <Table
+          elements={list}
+          handleCheck={handleCheck}
+          handleRemoveItem={handleRemoveItem}
+        ></Table>
+      </article>
+      <footer className="footer"> footer</footer>
+    </div>
+  );
 }
 
 export default App;
