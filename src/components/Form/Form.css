@@ -1,0 +1,27 @@
+.form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: #ffffff;
+  gap: 30px;
+  padding: 10px;
+}
+
+.title {
+  font-family: "system-ui", sans-serif;
+}
+
+.inputText {
+  width: 300px;
+  padding: 10px 10px;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  font-weight: 600;
+  font-size: medium;
+  color: #ffffff;
+  background-color: #171823;
+}

@@ -1,0 +1,18 @@
+.table__ul {
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+  align-items: space-between;
+  background-color: #171823;
+}
+
+.table__li {
+  display: flex;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+  justify-content: space-between;
+  align-items: center;
+  height: 4rem;
+  border: 1px groove #acabab;
+  border-radius: 4px;
+}
