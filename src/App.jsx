@@ -1,14 +1,15 @@
 import { useState, useEffect } from "react";
 import { Form } from "./components/Form/Form";
 import { Table } from "./components/Table/Table";
-import { getTodos } from "./services/list.service";
+import { getTask, addTask, updateTask } from "./services/list.service";
 import "./App.css";
 
 function App() {
   const [list, setList] = useState([]);
 
   useEffect(() => {
-    getTodos().then((data) => {
+    getTask().then((data) => {
+      console.log("useEffect: ", data);
       setList(data);
     });
   }, []);
@@ -22,24 +23,22 @@ function App() {
     return itemMayor + 1;
   };
 
-  const handleAddItem = (pTitle) => {
+  const handleAddItem = async (pTitle) => {
     const newItem = {
       id: getId(),
       title: pTitle,
       completed: false,
     };
+    const addedTask = await addTask({ newItem });
     setList([...list, newItem]);
   };
 
   const handleRemoveItem = (id) => {
     const newList = list.filter((item) => item.id != id);
-
-    if (newList.length >= 0) {
-      setList(newList);
-    }
+    setList(newList);
   };
 
-  const handleCheck = ({ id }) => {
+  const handleCheck = async ({ id }) => {
     const newList = list.map((item) => {
       if (item.id == id) {
         return {
@@ -50,6 +49,9 @@ function App() {
       return item;
     });
 
+    const taskChanged = newList.find((item) => item.id === id);
+    console.log("taskChanged ", taskChanged);
+    await updateTask({ taskChanged });
     setList(newList);
   };
 
