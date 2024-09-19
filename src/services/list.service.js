@@ -41,8 +41,7 @@ export async function addTask({ newItem }) {
 		headers: defaultHeaders,
 		body: JSON.stringify(newItem),
 	});
-
-	return response.json();
+	return handleResponse(response);
 }
 
 export async function updateTask({ taskChanged, id }) {
@@ -51,16 +50,15 @@ export async function updateTask({ taskChanged, id }) {
 		headers: defaultHeaders,
 		body: JSON.stringify(taskChanged),
 	});
-
-	return response.json();
+	return handleResponse(response);
+	// return response.json();
 }
 
 export const deleteTask = async ({ id }) => {
-	console.log("del", id);
-	await fetch(`${URL_BASE}/${id}`, {
+	const response = await fetch(`${URL_BASE}/${id}`, {
 		method: "DELETE",
 		headers: defaultHeaders,
 	});
 
-	// return handleResponse(response);
+	return handleResponse(response);
 };

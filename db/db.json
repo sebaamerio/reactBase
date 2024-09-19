@@ -23,7 +23,7 @@
     {
       "id": "6",
       "title": "Title 6",
-      "completed": false
+      "completed": true
     },
     {
       "id": "8",
@@ -31,9 +31,38 @@
       "completed": false
     },
     {
-      "id": "9",
-      "title": "title24",
+      "id": "10",
+      "title": "title 9",
       "completed": true
+    },
+    {
+      "id": "11",
+      "title": "title 12",
+      "completed": false
+    }
+  ],
+  "posts": [
+    {
+      "id": "1",
+      "title": "a title",
+      "views": 100
+    },
+    {
+      "id": "2",
+      "title": "another title",
+      "views": 200
+    }
+  ],
+  "comments": [
+    {
+      "id": "1",
+      "text": "a comment about post 1",
+      "postId": "1"
+    },
+    {
+      "id": "2",
+      "text": "another comment about post 1",
+      "postId": "1"
     }
   ]
 }

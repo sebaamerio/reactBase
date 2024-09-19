@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { Toaster, toast } from "sonner";
 import { Form } from "./components/Form/Form";
 import { Table } from "./components/Table/Table";
 import { getTask, addTask, updateTask, deleteTask } from "./services/list.service";
@@ -31,14 +32,15 @@ function App() {
 		};
 		const addedTask = await addTask({ newItem });
 		setList([...list, newItem]);
+		toast.success("Se agregado la tarea correctamente");
 	};
 
 	const handleRemoveItem = async ({ id }) => {
-		console.log("remove ", id);
 		const newList = list.filter((item) => item.id != id);
 
 		await deleteTask({ id });
 		setList(newList);
+		toast.error("Eliminado correctamente");
 	};
 
 	const handleCheck = async ({ id }) => {
@@ -55,10 +57,12 @@ function App() {
 		const taskChanged = newList.find((item) => item.id === id);
 		await updateTask({ taskChanged, id });
 		setList(newList);
+		toast.success("Actualizado correctamente");
 	};
 
 	return (
 		<div className="grid-container">
+			<Toaster richColors visibleToasts={1} />
 			<header className="header">
 				<Form handleAddItem={handleAddItem} />
 			</header>
